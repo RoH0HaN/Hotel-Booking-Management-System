@@ -1,22 +1,18 @@
 <%-- 
     Document   : home
-    Created on : 16-Nov-2022, 7:00:15 PM
+    Created on : 23-Nov-2022, 10:40:01 PM
     Author     : mysterio
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <!-- jQuery library -->
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-        <!-- Popper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Hotel Home</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -25,9 +21,11 @@
         <!-- Style.css -->
         <link rel="stylesheet" href="css/home.css">
         <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/footer.css">
     </head>
+
     <body>
-        <%@include file="navbar.jsp" %>
+        <div><%@include file="navbar.jsp" %></div>
         <!-- Home section  -->
         <div class="mt-5 pt-5">
             <div class="container">
@@ -172,6 +170,7 @@
                 </div>
             </div>
         </div>
+        <div><%@include file="footer.jsp" %></div>
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -180,6 +179,6 @@
                 integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
         <!-- Custom Script -->
-        <script src="js/home.js"></script>
     </body>
+
 </html>
