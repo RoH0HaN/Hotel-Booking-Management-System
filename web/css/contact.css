@@ -10,7 +10,6 @@ body{
     line-height: 1.5;
 }
 .contact-bg{
-    height: 40vh;
     background:rgba(0, 0, 0, 0.9);
     background-position: 50% 100%;
     background-repeat: no-repeat;
