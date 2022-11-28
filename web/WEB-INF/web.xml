@@ -16,6 +16,10 @@
         <servlet-name>BookingServlet</servlet-name>
         <servlet-class>com.hotel.servlets.BookingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>com.hotel.servlets.ContactServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>BookingServlet</servlet-name>
         <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/ContactServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

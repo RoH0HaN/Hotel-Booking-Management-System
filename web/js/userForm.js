@@ -15,10 +15,10 @@ sign_in_btn.addEventListener("click", () => {
 
 $(document).ready(function () {
     console.log("Loaded.....");
-    
+
     $('#log-form').on('submit', function (event) {
         event.preventDefault();
-
+        $('#log-btn').text("Logging in");
         let logForm = new FormData(this);
 
         // Send Login Servlet--->
@@ -33,13 +33,16 @@ $(document).ready(function () {
                             .then((value) => {
                                 window.location = "home.jsp"
                             });
+                    $('#log-btn').text("login");
                 } else {
                     swal("Oops", "Invalid Details!", "error")
+                    $('#log-btn').text("login");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 swal("Oops", "Something went wrong!", "error")
+                $('#log-btn').text("login");
             },
             processData: false,
             contentType: false
@@ -49,7 +52,7 @@ $(document).ready(function () {
 
     $('#reg-form').on('submit', function (event) {
         event.preventDefault();
-
+        $('#reg-btn').text("Setting up");
         let regForm = new FormData(this);
 
         // Send Register Servlet--->
@@ -62,15 +65,18 @@ $(document).ready(function () {
                 if (data.trim() === 'done') {
                     swal("Registration Successful", "Wellcome to our Website!", "success")
                             .then((value) => {
-                                window.location = "home.jsp"
+                                window.location = "userForm.jsp"
                             });
+                    $('#reg-btn').text("register");
                 } else {
                     swal("Oops", "Email or Phone Already Exists!", "error")
+                    $('#reg-btn').text("register");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 swal("Oops", "Something went wrong!", "error")
+                $('#reg-btn').text("register");
             },
             processData: false,
             contentType: false

@@ -16,7 +16,8 @@
 .ftr {
     width: 100%;
     position: absolute; 
-    background: linear-gradient(90deg, rgba(0,186,240,1) 0%, rgba(29,85,144,1) 100%);
+    /*background: linear-gradient(90deg, rgba(0,186,240,1) 0%, rgba(29,85,144,1) 100%);*/
+    background: black;
     color: #fff;
     padding: 40px 0px 10px;
     border-top-left-radius: 125px;

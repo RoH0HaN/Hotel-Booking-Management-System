@@ -1,48 +1,43 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-mainbg">
-    <!-- Logo -->
-    <a class="navbar-brand navbar-logo" href="#">My Hotel</a>
-    <!-- Collapse Button -->
-    <button 
-        class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-    </button>
-    <!-- Links -->
-    <div 
-        class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+<%@page import="com.hotel.entities.User"%>
+<%
+    User user = (User) session.getAttribute("currentUser");
+%>
 
-            <!-- Nav Links -->
-            <li class="nav-item">
-                <a 
-                    class="nav-link" href="home.jsp">
-                    <i class="fas fa-home"></i>Home
-                </a>
-            </li>
-            <li class="nav-item">
-                <a 
-                    class="nav-link" href="#Components">
-                    <i class="fas fa-images"></i>Gallery
-                </a>
-            </li>
-            <li class="nav-item">
-                <a 
-                    class="nav-link" href="contact.jsp">
-                    <i class="fas fa-phone-volume"></i>Contact
-                </a>
-            </li>
-            <li class="nav-item">
-                <a 
-                    class="nav-link" href="room.jsp">
-                    <i class="fas fa-door-open"></i>Rooms
-                </a>
-            </li>
-            <li class="nav-item">
-                <a 
-                    class="nav-link" href="userForm.jsp">
-                    <i class="fas fa-sign-in-alt"></i>Login
-                </a>
-            </li>
+<div class="header" id="header">
+    <nav class="mynav">
+        <h3>&nbsp;My Hotel</h3>
+        <ul id="sidemenu">
+            <li><a href="home.jsp"><span class="fas fa-home"></span>&nbsp;HOME</a></li>
+            <li><a href="#"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
+            <li><a href="contact.jsp"><span class="fas fa-phone-volume"></span>&nbsp;Contact</a></li>
+            <li><a href="room.jsp"><span class="fas fa-door-open"></span>&nbsp;Room</a></li>
+                <%
+                    if (user != null) {
+                %>
+            <li><a href="myBookings.jsp"><span class="fas fa-clipboard-check"></span>&nbsp;My Bookings</a></li>
+            <li><a href="userForm.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
+            <li><a id="out-btn" href="#"><span class="fas fa-sign-out-alt"></span>&nbsp;Logout</a></li>
+                <%
+                } else {
+                %>
+            <li><a href="userForm.jsp"><span class="fas fa-sign-in-alt"></span>&nbsp;Login</a></li>
+                <%
+                    }
+                %>
+            <i class="fas fas1 fa-bars" onclick="closemenu()"></i>
         </ul>
-    </div>
-</nav>
+        <i class="fas fas1 fa-bars" onclick="openmenu()"></i>
+    </nav>
+</div>
+<script>
+    $(document).ready(function () {
+        console.log("Navbar Loaded....")
+        $('#out-btn').click(function () {
+            swal("Thank You!", "Logged Out Successfully.", "success")
+                    .then((value) => {
+                        window.location = "LogoutServlet"
+                    });
+        })
+    });
+</script>
+<script src="js/navbar.js"></script>

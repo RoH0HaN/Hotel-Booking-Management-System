@@ -28,7 +28,7 @@
                         <div class="input-field">
                             <input name="password" required type="password" placeholder="Password" />
                         </div>
-                        <button type="submit" class="btn solid">Login</button>
+                        <button id="log-btn" type="submit" class="btn solid">Login</button>
                         <p class="social-text">Or sign in with social platforms</p>
                         <div class="social-media">
                             <a href="#" class="social-icon">
@@ -44,7 +44,7 @@
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
-                        <button type="submit" class="btn solid">Admin Login</button>
+                        <button class="btn solid">Admin Login</button>
                     </form>
 
                     <form id="reg-form" action="RegisterServlet" method="POST" class="sign-up-form">
@@ -58,7 +58,7 @@
                         <div class="input-field">
                             <input name="password" required type="password" placeholder="Password" />
                         </div>
-                        <button type="submit" class="btn solid" value="Sign up">Signup</button>
+                        <button id="reg-btn" type="submit" class="btn solid" value="Sign up">Register</button>
                         <p class="social-text">Or sign up with social platforms</p>
                         <div class="social-media">
                             <a href="#" class="social-icon">

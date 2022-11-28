@@ -14,17 +14,17 @@
         <title>JSP Page</title>
         <!-- jQuery library -->
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
         <!-- Style.css -->
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/footer.css">
@@ -32,8 +32,7 @@
     </head>
 
     <div><%@include file="navbar.jsp" %></div>
-    <%
-        String id = request.getParameter("id");
+    <%        String id = request.getParameter("id");
     %>
     <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
     <sql:query dataSource="${con}" var="rs">select * from room where id='<%= id%>';</sql:query>
@@ -165,73 +164,6 @@
                                 <div id="ldr" class="spinner-border" style="display: none;" role="status"></div>
                                 <button id="sbmt-btn" type="submit" class="btn btn-primary">Submit</button>
                             </center>
-
-
-                            <!--                            <div class="form-row">
-                                                            <div class="col-md-6 mb-3">
-                                                                <input name="name" type="text" class="form-control" id="validationCustom01" placeholder="Your name"
-                                                                       required>
-                                                                <div class="invalid-feedback">
-                                                                    Please provide a valid Name.
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input name="email" type="email" class="form-control" id="validationCustom03" placeholder="Email"
-                                                                       required>
-                                                                <div class="invalid-feedback">
-                                                                    Please provide a valid Email.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row mt-4">
-                                                            <div class="col-md-6 mb-3">
-                                                                <input name="phone" type="text" class="form-control" id="validationCustom04"
-                                                                       placeholder="Phone Number" required>
-                                                                <div class="invalid-feedback">
-                                                                    Please provide a valid Phone Number.
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <select name="idType" id="choice1" class="form-control" required>
-                                                                    <option disabled>Select Id Type...</option>
-                                                                    <option>Voter card</option>
-                                                                    <option>Aadhar Card</option>
-                                                                    <option>Pan card</option>
-                                                                    <option>Passport</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group col-md-10">
-                                                                <input name="idNumber" type="tel" class="form-control" id="validationCustom09"
-                                                                       placeholder="Card Number" required>
-                                                                <div class="invalid-feedback">
-                                                                    Please provide a valid  Number.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Address" required>
-                                                            <div class="invalid-feedback">
-                                                                Please provide a valid Address.
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputAddress "> Check In : </label>
-                                                                <input name="checkIn" type="date" class="form-control" id="validationCustom05"
-                                                                       required>
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label for="inputAddress "> Check Out : </label>
-                                                                <input name="checkOut" type="date" class="form-control" id="validationCustom05"
-                                                                       required>
-                                                            </div>
-                                                        </div>
-                                                        <center>
-                                                            <div class="spinner-border ldr" style="display: none;" role="status"></div><br>
-                                                            <div class="btn">
-                                                                <button id="sbmt-btn" type="submit" class="btn btn-primary butn">Book</button>
-                                                            </div>
-                                                        </center>-->
                         </form>
                     </div>
                 </div>
@@ -239,13 +171,6 @@
         </div>
     </c:forEach>
     <%@include file="footer.jsp" %>
-    <!-- Scripts -->
-    <!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-    crossorigin="anonymous"></script>
 
     <!-- Custom Script -->
     <script src="js/booking.js"></script>

@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -18,6 +19,14 @@
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <link rel="stylesheet" href="css/room.css">
         <link rel="stylesheet" href="css/footer.css">
@@ -26,6 +35,7 @@
     </head>
 
     <body>
+
         <div><%@include file="navbar.jsp" %></div>
         <div class="mt-5 pt-5">
             <div class="container">
@@ -41,7 +51,7 @@
                             laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.
                         </p>
                         <div>
-                            <a href="#contact" class="text-center btn btn-outline-dark btn-lg btn-block">Contact Us</a>
+                            <a href="contact.jsp" class="text-center btn btn-outline-dark btn-lg btn-block">Contact Us</a>
                         </div>
                     </div>
                     <!-- Column 1 -->
@@ -72,10 +82,22 @@
                             <div class="right">
                                 <h4>${row.type}</h4>
                                 <p>${row.details}</p>
-                                <h5>From ₹ ${row.rent}/night</h5>
+                                <h5>From ₹ &nbsp;&nbsp;${row.rent}/night</h5>
+                                <%                                    
+                                if (user != null) {
+                                %>
                                 <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
                                 </a>
+                                <%
+                                } else {
+                                %>
+                                <a id="book-btn" href="#" class="flex1 btn btn-info">
+                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                </a>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
 
@@ -100,10 +122,22 @@
                             <div class="right">
                                 <h4>${row.type}</h4>
                                 <p>${row.details}</p>
-                                <h5>From ₹ ${row.rent}/night</h5>
-                                <a href="" class="flex1 btn btn-info">
+                                <h5>From ₹ &nbsp;&nbsp;${row.rent}/night</h5>
+                                <%                                    
+                                if (user != null) {
+                                %>
+                                <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
                                 </a>
+                                <%
+                                } else {
+                                %>
+                                <a id="book-btn" href="#" class="flex1 btn btn-info">
+                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                </a>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
 
@@ -124,14 +158,16 @@
             </div>
         </section>
         <div><%@include file="footer.jsp" %></div>
-        <!-- Scripts -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
+
         <!-- Custom Script -->
+        <script>
+            $(document).ready(function () {
+                console.log("Rooms Loaded.")
+                $('#book-btn').click(function () {
+                    swal("Oops", "Please Login to Book a Room!", "error")
+                })
+            });
+        </script>
     </body>
 
 

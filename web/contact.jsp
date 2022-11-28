@@ -13,14 +13,24 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
     </head>
 
     <body>
+        <div><%@include file="navbar.jsp" %></div>
         <section class="contact-section">
             <div class="contact-bg">
                 <h3>Get in Touch with Us</h3>
@@ -66,17 +76,17 @@
                         <img src="image/contact-logo.svg" alt="">
                     </div>
 
-                    <form>
+                    <form action="ContactServlet" method="POST" id="contact-form">
                         <div>
-                            <input type="text" class="form-control" placeholder="First Name">
-                            <input type="text" class="form-control" placeholder="Last Name">
+                            <input name="firstn" type="text" class="form-control" placeholder="First Name">
+                            <input name="lastn" type="text" class="form-control" placeholder="Last Name">
                         </div>
                         <div>
-                            <input type="email" class="form-control" placeholder="E-mail">
-                            <input type="text" class="form-control" placeholder="Phone">
+                            <input name="email" type="email" class="form-control" placeholder="E-mail">
+                            <input name="phone" type="text" class="form-control" placeholder="Phone">
                         </div>
-                        <textarea rows="5" placeholder="Message" class="form-control" style="resize: none;"></textarea>
-                        <input type="submit" class="send-btn" value="send message">
+                        <textarea name="messege" rows="5" placeholder="Message" class="form-control" style="resize: none;"></textarea>
+                        <button id="messege-btn" type="submit" class="send-btn" value="send message">Submit Request</button>
                     </form>
 
                 </div>
@@ -99,14 +109,9 @@
                 </div>
             </div>
         </section>
-        <!-- Scripts -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
+
         <!-- Custom Script -->
+        <script src="js/contact.js"></script>
     </body>
 
 </html>
