@@ -15,7 +15,7 @@
                     if (user != null) {
                 %>
             <li><a href="myBookings.jsp"><span class="fas fa-clipboard-check"></span>&nbsp;My Bookings</a></li>
-            <li><a href="userForm.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
+            <li><a href="profile.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
             <li><a id="out-btn" href="#"><span class="fas fa-sign-out-alt"></span>&nbsp;Logout</a></li>
                 <%
                 } else {

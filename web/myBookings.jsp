@@ -35,8 +35,7 @@
             <div class="container" style="height: 40vh;">
                 <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
                     <thead class="thead-light">
-                        <tr>
-                            <th scope="col">#</th>
+                        <tr class="table-primary">
                             <th scope="col">Booking no.</th>
                             <th scope="col">Moblie Number</th>
                             <th scope="col">Email</th>
@@ -46,8 +45,7 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${rs.rows}" var="row">
-                        <tr>
-                            <td>1</td>
+                            <tr class="table-primary">
                             <td>${row.id}</td>
                             <td>${row.phone}</td>
                             <td>${row.email}</td>
