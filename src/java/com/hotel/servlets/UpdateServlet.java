@@ -23,46 +23,55 @@ public class UpdateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             try {
-//                String delPath = null;
-                User usr = new User();
-                int id = usr.getId();
+                HttpSession s = request.getSession();
+                User user = (User) s.getAttribute("currentUser");
+                boolean check = false;
+                boolean dflt = false;
                 String Name = request.getParameter("name");
                 String Email = request.getParameter("email");
                 String Pass = request.getParameter("password");
                 Part part = request.getPart("photo");
                 String imageName = part.getSubmittedFileName();
-                
-                if(imageName == null){
-                    imageName = usr.getProfileImage();
+                String profilePic = user.getProfileImage();
+                if ("".equals(imageName)) {
+                    imageName = user.getProfileImage();
+                    check = true;
+                } else if (profilePic.equals("default.svg")) {
+                    dflt = true;
                 }
-                
+
                 //Get the User from Session
-                HttpSession s  = request.getSession();
-                User user = (User) s.getAttribute("currentUser");
-                String img = user.getProfileImage();
                 user.setEmail(Email);
                 user.setName(Name);
                 user.setPassword(Pass);
                 user.setProfileImage(imageName);
-                
+
                 //Updating Database
                 UserDao userDao = new UserDao(ConnectionProvider.getConnection());
-                
+
                 if (userDao.updateUser(user)) {
-                    String delPath = request.getRealPath("/")+"profile"+File.separator+img;
-                    String upPath = request.getRealPath("/")+"profile"+File.separator+user.getProfileImage();
-                    
-                    if(Helper.deleteFile(delPath)){
-                        if(Helper.saveFile(part.getInputStream(), upPath)){
+                    String delPath = request.getRealPath("/") + "profile" + File.separator + profilePic;
+                    String upPath = request.getRealPath("/") + "profile" + File.separator + user.getProfileImage();
+
+                    if (dflt) {
+                        if (Helper.saveFile(part.getInputStream(), upPath)) {
                             out.print("done");
+                            dflt = false;
                         }
+                    } else if (dflt == false) {
+                        if (Helper.deleteFile(delPath)) {
+                            if (Helper.saveFile(part.getInputStream(), upPath)) {
+                                out.print("done");
+                            }
+                        }
+                    } else {
+                        out.print("done");
                     }
                 } else {
                     out.print("error");
                 }
-                
-                String Query = "update users set name=?, email=?, password=? ";
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
