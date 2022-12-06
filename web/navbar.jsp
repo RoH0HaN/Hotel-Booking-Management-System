@@ -8,7 +8,7 @@
         <h3>&nbsp;My Hotel</h3>
         <ul id="sidemenu">
             <li><a href="home.jsp"><span class="fas fa-home"></span>&nbsp;HOME</a></li>
-            <li><a href="#"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
+            <li><a href="gallary.jsp"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
             <li><a href="contact.jsp"><span class="fas fa-phone-volume"></span>&nbsp;Contact</a></li>
             <li><a href="room.jsp"><span class="fas fa-door-open"></span>&nbsp;Room</a></li>
                 <%

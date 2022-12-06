@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,600;1,200&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+.btn {
+  width: 100%;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  cursor: pointer;
+  background-color: #5995fd;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  transition: 0.5s;
+}
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+section .image {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+section .image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+section .cb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+section .cb .form {
+  width: 75%;
+}
+section .cb .form h2 {
+  color: blueviolet;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 4px solid black;
+  display: inline-block;
+  letter-spacing: 2px;
+}
+section .cb .form .inputbox {
+  margin-bottom: 20px;
+}
+section .cb .form .inputbox .l {
+  display: block;
+  text-align: right;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #607db8;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+section .cb .form .inputbox label {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #607db8;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+section .cb .form .inputbox input {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  font-weight: 400;
+  border: 1px solid black;
+  font-size: 15px;
+  background: transparent;
+  border-radius: 30px;
+}
+
+
+section .cb .form .inputbox p {
+  color: #607d8b;
+}
+section .cb .form .inputbox p a {
+  color: #ff4584;
+}
+h3 {
+  text-align: center;
+  color: #607d8b;
+  font-weight: 500;
+  font-size: 18px;
+}
+.d1 {
+  flex-basis: 31%;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  padding: 20px 12px;
+  box-sizing: border-box;
+}
+.d2 {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+a i {
+  transition: all 0.3s linear;
+}
+a:hover i {
+  transform: scale(1.4);
+}
+.fa-facebook-official {
+  color: #3b5998;
+}
+.fa-google {
+  color: #4285f4;
+}
+.fa-twitter {
+  color: #00acee;
+}

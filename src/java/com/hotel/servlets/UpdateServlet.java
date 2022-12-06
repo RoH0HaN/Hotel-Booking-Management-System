@@ -50,8 +50,8 @@ public class UpdateServlet extends HttpServlet {
                 UserDao userDao = new UserDao(ConnectionProvider.getConnection());
 
                 if (userDao.updateUser(user)) {
-                    String delPath = request.getRealPath("/") + "profile" + File.separator + profilePic;
-                    String upPath = request.getRealPath("/") + "profile" + File.separator + user.getProfileImage();
+                    String delPath = request.getRealPath(""+ File.separator ) + "profile" + File.separator + profilePic;
+                    String upPath = request.getRealPath(""+ File.separator ) + "profile" + File.separator + user.getProfileImage();
 
                     if (dflt) {
                         if (Helper.saveFile(part.getInputStream(), upPath)) {

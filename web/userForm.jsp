@@ -44,7 +44,7 @@
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
-                        <button class="btn solid">Admin Login</button>
+                        <button onclick="window.location.href='Admin/Admin_Login.jsp';" class="btn solid">Admin Login</button>
                     </form>
 
                     <form id="reg-form" action="RegisterServlet" method="POST" class="sign-up-form">
