@@ -123,15 +123,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:forEach items="${rs.rows}" var="row">
                                 <tr>
-                                    <td>Name</td>
-                                    <td>Booking no</td>
-                                    <td>Mobile number</td>
-                                    <td>Email</td>
-                                    <td>Status</td>
+                                    <td>${row.name}</td>
+                                    <td>${row.id}</td>
+                                    <td>${row.phone}</td>
+                                    <td>${row.email}</td>
+                                    <td>${row.status}</td>
                                     <td><button class="btn btn-primary" data-toggle="modal"
                                                 data-target=".bd-example-modal-lg">View</button></td>
                                 </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
