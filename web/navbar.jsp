@@ -1,6 +1,9 @@
 <%@page import="com.hotel.entities.User"%>
 <%
     User user = (User) session.getAttribute("currentUser");
+    if(user==null){
+        response.sendRedirect("userForm.jsp");
+    }
 %>
 
 <div class="header" id="header">

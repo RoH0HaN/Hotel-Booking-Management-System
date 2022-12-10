@@ -130,8 +130,7 @@
                                     <td>${row.phone}</td>
                                     <td>${row.email}</td>
                                     <td>${row.status}</td>
-                                    <td><button class="btn btn-primary" data-toggle="modal"
-                                                data-target=".bd-example-modal-lg">View</button></td>
+                                    <td><button onclick="window.location.href='Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
                                 </tr>
                                 </c:forEach>
                             </tbody>

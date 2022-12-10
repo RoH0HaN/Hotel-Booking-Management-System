@@ -1,10 +1,10 @@
-
 package com.hotel.servlets;
 
 import com.hotel.helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -12,49 +12,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @MultipartConfig
-public class BookingServlet extends HttpServlet {
+public class OrderActionServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-          
             try {
-                String Name = request.getParameter("name");
-                String Email = request.getParameter("email");
-                String Phone = request.getParameter("phone");
-                String idType = request.getParameter("idType");
-                String idNumber = request.getParameter("idNumber");
-                String Address = request.getParameter("address");
-                String checkIn = request.getParameter("checkIn");
-                String CheckOut = request.getParameter("checkOut");
-                String RoomId = request.getParameter("roomid");
-                String UserId = request.getParameter("userid");
                 
                 Connection con = ConnectionProvider.getConnection();
-                String Query = "insert into booking(name, email, phone, identity, number, address, checkin, checkout, status, remarks, user_id, room_id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
-                
-                PreparedStatement st = con.prepareStatement(Query);
-                st.setString(1, Name);
-                st.setString(2, Email);
-                st.setString(3, Phone);
-                st.setString(4, idType);
-                st.setString(5, idNumber);
-                st.setString(6, Address);
-                st.setString(7, checkIn);
-                st.setString(8, CheckOut);
-                st.setString(9, "Pending");
-                st.setString(10, "Not Updated Yet.");
-                st.setInt(11, Integer.parseInt(UserId));
-                st.setInt(12, Integer.parseInt(RoomId));
-                st.executeUpdate();
+                String Remarks = request.getParameter("remarks");
+                String Status = request.getParameter("status");
+                String Bid = request.getParameter("bookingid");
+                out.println("----!!!! : "+Bid);
+
+                String Query = "update booking set status=?, remarks=? where id=?";
+                PreparedStatement stmt = con.prepareStatement(Query);
+                stmt.setString(1, Status);
+                stmt.setString(2, Remarks);
+                stmt.setInt(3, Integer.parseInt(Bid));
+
+                stmt.executeUpdate();
                 
                 out.print("done");
             } catch (Exception e) {
                 out.print(""+e.getMessage());
                 e.printStackTrace();
             }
-            
         }
     }
 

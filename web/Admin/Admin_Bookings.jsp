@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,32 +55,35 @@
                 <div class="container mb-5">
                     <div class="container">
                         <center><u>
-                                <h1>All Bookings</h1>
+                                <h1>Approved Bookings</h1>
                             </u></center>
                     </div>
 
                     <div class="container">
-                        <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Booking no.</th>
-                                    <th scope="col">Moblie Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Booking no</td>
-                                    <td>Mobile number</td>
-                                    <td>Email</td>
-                                    <td>Status</td>
-                                    <td><button class="btn btn-primary" data-toggle="modal"
-                                                data-target=".bd-example-modal-lg">View</button></td>
-                                </tr>
+                        <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
+                        <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved';</sql:query>
+                            <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Booking no.</th>
+                                        <th scope="col">Moblie Number</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${rs.rows}" var="row">
+                                    <tr>
+                                        <td>${row.name}</td>
+                                        <td>${row.id}</td>
+                                        <td>${row.phone}</td>
+                                        <td>${row.email}</td>
+                                        <td>${row.status}</td>
+                                        <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -87,58 +92,6 @@
             <!-- MAIN -->
         </section>
         <!-- CONTENT -->
-
-
-        <!-- modal -->
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form class="p-5">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Name :</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Name"disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Email :</label>
-                                <input type="email" class="form-control" id="inputPassword4" placeholder="Email"disabled>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address :</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Show Address"disabled>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress">Phone number :</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="Phone number"disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress">Card type :</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="Card type"disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress">Card number :</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="Card number"disabled>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress "> Check In : </label>
-                                <input type="date" class="form-control" id="validationCustom05" placeholder="City" disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress "> Check Out : </label>
-                                <input type="date" class="form-control" id="validationCustom05" placeholder="City" disabled>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Aprove</button>
-                        <button type="submit" class="btn btn-primary">Reject</button>
-                    </form>
-                </div>
-            </div>
-        </div>
         <script src="js/Admin_Dashboard.js"></script>
     </body>
 

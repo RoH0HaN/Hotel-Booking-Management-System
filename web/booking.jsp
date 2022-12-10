@@ -33,6 +33,7 @@
     <body>
         <div><%@include file="navbar.jsp" %></div>
         <%        String id = request.getParameter("id");
+                  int Uid = user.getId();
         %>
         <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
         <sql:query dataSource="${con}" var="rs">select * from room where id='<%= id%>';</sql:query>
@@ -126,6 +127,12 @@
                         </div>
                         <div class="modal-body">
                             <form action="BookingServlet" method="POST" id="book-form">
+                                <div class="form-group" style="display: none;">
+                                    <input name="roomid" type="text" class="form-control" value="<%= id%>">
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <input name="userid" type="text" class="form-control" value="<%= Uid%>">
+                                </div>
                                 <div class="form-group">
                                     <input name="name" placeholder="Full Name" type="text" class="form-control">
                                 </div>
