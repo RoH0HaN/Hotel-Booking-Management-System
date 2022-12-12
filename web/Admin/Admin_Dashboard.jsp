@@ -4,6 +4,7 @@
     Author     : mysterio
 --%>
 
+<%@page import="com.hotel.entities.Admin"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.hotel.helper.ConnectionProvider"%>
 <%@page import="java.sql.Statement"%>
@@ -17,7 +18,7 @@
         <!-- My CSS -->
         <link rel="stylesheet" href="css/style.css">
 
-        <title>AdminHub</title>
+        <title>Dashboard</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -33,7 +34,12 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
-
+        <%
+            Admin admin = (Admin) session.getAttribute("currentAdmin");
+            if (admin == null) {
+                response.sendRedirect("Admin_Login.jsp");
+            }
+        %>
 
         <div class="headernav" id="header">
             <div class="navcontainer">
@@ -43,6 +49,7 @@
                         <li><a href="Admin_Dashboard.jsp">Dashboard</a></li>
                         <li><a href="Admin_addrooms.jsp">Addrooms</a></li>
                         <li><a href="Admin_Bookings.jsp">Bookings</a></li>
+                        <li><a id="out-btn" href="#">Logout</a></li>
                         <i class="fa-solid fa-times" onclick="closemenu()"></i>
                     </ul>
                     <i class="fa-solid fa-bars" onclick="openmenu()"></i>
@@ -59,6 +66,12 @@
                 <div class="head-title">
                     <div class="left">
                         <h1>Dashboard</h1>
+                        <%if (admin != null) {%>
+                        <p><b>Name :</b> <%= admin.getName()%></p>
+                        <p><b>Email :</b> <%= admin.getEmail()%></p>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
 
@@ -111,27 +124,27 @@
                     <div class="container">
                         <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
                         <sql:query dataSource="${con}" var="rs">select * from booking where status='Pending';</sql:query>
-                        <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Booking no.</th>
-                                    <th scope="col">Moblie Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Booking no.</th>
+                                        <th scope="col">Moblie Number</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <c:forEach items="${rs.rows}" var="row">
-                                <tr>
-                                    <td>${row.name}</td>
-                                    <td>${row.id}</td>
-                                    <td>${row.phone}</td>
-                                    <td>${row.email}</td>
-                                    <td>${row.status}</td>
-                                    <td><button onclick="window.location.href='Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
-                                </tr>
+                                    <tr>
+                                        <td>${row.name}</td>
+                                        <td>${row.id}</td>
+                                        <td>${row.phone}</td>
+                                        <td>${row.email}</td>
+                                        <td>${row.status}</td>
+                                        <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                                    </tr>
                                 </c:forEach>
                             </tbody>
                         </table>

@@ -4,6 +4,7 @@
     Author     : mysterio
 --%>
 
+<%@page import="com.hotel.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -12,31 +13,56 @@
 <html lang="en" dir="ltr">
 
     <head>
-        <title>Hotel Booking Website</title>
+        <title>Rooms | My Hotel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
-        <!-- Scripts -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <link rel="stylesheet" href="css/room.css">
-        <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/navbar.css">
-
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/room.css">
+        
     </head>
 
     <body>
-
-        <div><%@include file="navbar.jsp" %></div>
+        <!--Navbar-->
+        <div class="header" id="header">
+            <nav class="mynav">
+                <h3>&nbsp;My Hotel</h3>
+                <ul id="sidemenu">
+                    <li><a href="userHome.jsp"><span class="fas fa-home"></span>&nbsp;HOME</a></li>
+                    <li><a href="gallary.jsp"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
+                    <li><a href="contact.jsp"><span class="fas fa-phone-volume"></span>&nbsp;Contact</a></li>
+                    <li><a href="room.jsp"><span class="fas fa-door-open"></span>&nbsp;Room</a></li>
+                        <%
+                            User user = (User) session.getAttribute("currentUser");
+                            if (user != null) {
+                        %>
+                    <li><a href="myBookings.jsp"><span class="fas fa-clipboard-check"></span>&nbsp;My Bookings</a></li>
+                    <li><a href="profile.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
+                    <li><a id="out-btn" href="#"><span class="fas fa-sign-out-alt"></span>&nbsp;Logout</a></li>
+                        <%
+                        } else {
+                        %>
+                    <li><a href="userForm.jsp"><span class="fas fa-sign-in-alt"></span>&nbsp;Login</a></li>
+                        <%
+                            }
+                        %>
+                    <i class="fas fas1 fa-bars" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fas1 fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
         <div class="mt-5 pt-5">
             <div class="container">
                 <div class="row align-items-center">
@@ -83,8 +109,8 @@
                                 <h4>${row.type}</h4>
                                 <p>${row.details}</p>
                                 <h5>From ₹ &nbsp;&nbsp;${row.rent}/night</h5>
-                                <%                                    
-                                if (user != null) {
+                                <%
+                                    if (user != null) {
                                 %>
                                 <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
@@ -92,7 +118,7 @@
                                 <%
                                 } else {
                                 %>
-                                <a id="book-btn" href="#" class="flex1 btn btn-info">
+                                <a class="book-btn" href="#" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
                                 </a>
                                 <%
@@ -123,8 +149,8 @@
                                 <h4>${row.type}</h4>
                                 <p>${row.details}</p>
                                 <h5>From ₹ &nbsp;&nbsp;${row.rent}/night</h5>
-                                <%                                    
-                                if (user != null) {
+                                <%
+                                    if (user != null) {
                                 %>
                                 <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
@@ -132,7 +158,7 @@
                                 <%
                                 } else {
                                 %>
-                                <a id="book-btn" href="#" class="flex1 btn btn-info">
+                                <a class="book-btn" href="#" class="flex1 btn btn-info">
                                     <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
                                 </a>
                                 <%
@@ -163,11 +189,12 @@
         <script>
             $(document).ready(function () {
                 console.log("Rooms Loaded.")
-                $('#book-btn').click(function () {
+                $('.book-btn').click(function () {
                     swal("Oops", "Please Login to Book a Room!", "error")
                 })
             });
         </script>
+        <script src="js/navbar.js"></script>
     </body>
 
 

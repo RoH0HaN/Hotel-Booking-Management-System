@@ -2,6 +2,7 @@ package com.hotel.entities;
 
 public class Admin {
     private String username;
+    private String phone;
     private String email;
     private String password;
     private String name;
@@ -16,6 +17,14 @@ public class Admin {
         this.password = password;
         this.name = name;
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUsername() {

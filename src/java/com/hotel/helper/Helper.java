@@ -32,4 +32,20 @@ public class Helper {
         }
         return check;
     }
+    public static boolean saveRoomPicture(InputStream is, String path){
+        boolean check = false;
+        try {
+            byte b[] = new byte[is.available()];
+            is.read(b);
+            
+            FileOutputStream fos = new FileOutputStream(path);
+            fos.write(b);
+            fos.flush();
+            fos.close();
+            check = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
 }

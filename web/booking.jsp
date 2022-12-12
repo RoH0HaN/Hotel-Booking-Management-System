@@ -4,6 +4,7 @@
     Author     : mysterio
 --%>
 
+<%@page import="com.hotel.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Book Rooms | My Hotel</title>
         <!-- jQuery library -->
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <!-- Popper JS -->
@@ -25,15 +26,43 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
-        <!-- Style.css -->
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/booking.css">
+        
     </head>
+
     <body>
-        <div><%@include file="navbar.jsp" %></div>
+        <!--Navbar-->
+        <div class="header" id="header">
+            <nav class="mynav">
+                <h3>&nbsp;My Hotel</h3>
+                <ul id="sidemenu">
+                    <li><a href="userHomejsp"><span class="fas fa-home"></span>&nbsp;HOME</a></li>
+                    <li><a href="gallary.jsp"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
+                    <li><a href="contact.jsp"><span class="fas fa-phone-volume"></span>&nbsp;Contact</a></li>
+                    <li><a href="room.jsp"><span class="fas fa-door-open"></span>&nbsp;Room</a></li>
+                        <%
+                            User user = (User) session.getAttribute("currentUser");
+                            if (user != null) {
+                        %>
+                    <li><a href="myBookings.jsp"><span class="fas fa-clipboard-check"></span>&nbsp;My Bookings</a></li>
+                    <li><a href="profile.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
+                    <li><a id="out-btn" href="#"><span class="fas fa-sign-out-alt"></span>&nbsp;Logout</a></li>
+                        <%
+                        } else {
+                        %>
+                    <li><a href="userForm.jsp"><span class="fas fa-sign-in-alt"></span>&nbsp;Login</a></li>
+                        <%
+                            }
+                        %>
+                    <i class="fas fas1 fa-bars" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fas1 fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
         <%        String id = request.getParameter("id");
-                  int Uid = user.getId();
+            int Uid = user.getId();
         %>
         <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
         <sql:query dataSource="${con}" var="rs">select * from room where id='<%= id%>';</sql:query>
@@ -178,6 +207,7 @@
             </div>
         </c:forEach>
         <%@include file="footer.jsp" %>
+        <script src="js/navbar.js"></script>
     </body>
     <!-- Custom Script -->
     <script src="js/booking.js"></script>

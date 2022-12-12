@@ -30,6 +30,7 @@ public class AdminDao {
                 admin.setEmail(set.getString("email"));
                 admin.setPassword(set.getString("admin_password"));
                 admin.setId(set.getInt("id"));
+                admin.setPhone(set.getString("phone"));
             }
 
         } catch (Exception e) {

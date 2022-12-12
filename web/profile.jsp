@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>profile</title>
+        <title>User Profile | My Hotel</title>
         <!-- jQuery library -->
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <!-- Popper JS -->
@@ -28,10 +28,38 @@
         crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/footer.css">
+        
     </head>
 
     <body>
-        <div><%@include file="navbar.jsp" %></div>
+        <!--Navbar-->
+        <div class="header" id="header">
+            <nav class="mynav">
+                <h3>&nbsp;My Hotel</h3>
+                <ul id="sidemenu">
+                    <li><a href="userHome.jsp"><span class="fas fa-home"></span>&nbsp;HOME</a></li>
+                    <li><a href="gallary.jsp"><span class="far fa-images"></span>&nbsp;Gallery</a></li>
+                    <li><a href="contact.jsp"><span class="fas fa-phone-volume"></span>&nbsp;Contact</a></li>
+                    <li><a href="room.jsp"><span class="fas fa-door-open"></span>&nbsp;Room</a></li>
+                        <%
+                            User user = (User) session.getAttribute("currentUser");
+                            if (user != null) {
+                        %>
+                    <li><a href="myBookings.jsp"><span class="fas fa-clipboard-check"></span>&nbsp;My Bookings</a></li>
+                    <li><a href="profile.jsp"><span class="fas fa-user-alt"></span>&nbsp;<%= user.getName()%></a></li>
+                    <li><a id="out-btn" href="#"><span class="fas fa-sign-out-alt"></span>&nbsp;Logout</a></li>
+                        <%
+                        } else {
+                        %>
+                    <li><a href="userForm.jsp"><span class="fas fa-sign-in-alt"></span>&nbsp;Login</a></li>
+                        <%
+                            }
+                        %>
+                    <i class="fas fas1 fa-bars" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fas1 fa-bars" onclick="openmenu()"></i>
+            </nav>
+        </div>
         <div class="mb-3 pt-5">
             <div class="container shadow p-5">
                 <div class="row align-items-center">
@@ -39,7 +67,7 @@
                     <div class="col-md-6">
                         <center>
                             <div class="container">
-                                <%                                    
+                                <%
                                     User u = (User) session.getAttribute("currentUser");
                                     if (u == null) {
                                         response.sendRedirect("userForm.jsp");
@@ -126,7 +154,9 @@
             </div>
         </div>
         <%@include file="footer.jsp" %>
+        <script src="js/navbar.js"></script>
+        <script src="js/profile.js"></script>
     </body>
-    <script src="js/profile.js"></script>
+    
 
 </html>

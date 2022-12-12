@@ -31,7 +31,7 @@ $(document).ready(function () {
                 if (data.trim() === 'done') {
                     swal("Welcome!", "Logged in Successfully.", "success")
                             .then((value) => {
-                                window.location = "home.jsp"
+                                window.location = "userHome.jsp"
                             });
                     $('#log-btn').text("login");
                 } else {

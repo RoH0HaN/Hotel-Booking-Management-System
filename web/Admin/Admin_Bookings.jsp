@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Bookings</title>
+        <title>Bookings</title>
         <!-- My CSS -->
         <link rel="stylesheet" href="css/style.css">
         <!-- Bootstrap -->
@@ -39,6 +39,7 @@
                         <li><a href="Admin_Dashboard.jsp">Dashboard</a></li>
                         <li><a href="Admin_addrooms.jsp">Addrooms</a></li>
                         <li><a href="Admin_Bookings.jsp">Bookings</a></li>
+                        <li><a id="out-btn" href="#">Logout</a></li>
                         <i class="fa-solid fa-times" onclick="closemenu()"></i>
                     </ul>
                     <i class="fa-solid fa-bars" onclick="openmenu()"></i>

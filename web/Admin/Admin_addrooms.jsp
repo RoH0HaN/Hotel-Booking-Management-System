@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Add Rooms</title>
+        <title>Add Rooms</title>
         <!-- My CSS -->
         <link rel="stylesheet" href="css/style.css">
         <!-- Bootstrap -->
@@ -18,9 +18,11 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
         <script src="https://kit.fontawesome.com/14d362f720.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
@@ -35,6 +37,7 @@
                         <li><a href="Admin_Dashboard.jsp">Dashboard</a></li>
                         <li><a href="Admin_addrooms.jsp">Addrooms</a></li>
                         <li><a href="Admin_Bookings.jsp">Bookings</a></li>
+                        <li><a id="out-btn" href="#">Logout</a></li>
                         <i class="fa-solid fa-times" onclick="closemenu()"></i>
                     </ul>
                     <i class="fa-solid fa-bars" onclick="openmenu()"></i>
@@ -50,7 +53,7 @@
             <!-- MAIN -->
             <main>
                 <div class="container mb-5">
-                    <h1><u>Single Room</u></h1>
+                    <h1><u>Add Rooms to Hotel</u></h1>
                     <div class="row align-items-center">
                         <!-- Column 1-->
                         <div class="col-md-6">
@@ -60,73 +63,44 @@
 
                         <!-- Column 2 -->
                         <div class="col-md-6 d-block d-sm-block d-md-block">
-                            <form class="needs-validation" id="form" novalidate>
+                            <form action="../AddRoomServlet" enctype="multipart/form-data" method="POST" class="needs-validation" id="rup-form" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
-                                        <input type="text" class="form-control" id="validationCustom01"
+                                        <input name="name" type="text" class="form-control" id="validationCustom01"
+                                               placeholder="Room Name" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <input name="rent" type="text" class="form-control" id="validationCustom01"
                                                placeholder="Room Price" required>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <select name="roomType" class="form-control" required>
+                                            <option disabled>!--Select Room Type--!</option>
+                                            <option>Single Bedroom</option>
+                                            <option>Double Bedroom</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Details"
+                                    <input name="details" type="text" class="form-control" id="inputAddress" placeholder="Details"
                                            required>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-10">
                                         <label for="inputAddress "> Add image : </label>
-                                        <input type="file" class="form-control" placeholder="Image" required>
+                                        <input name="photo" type="file" value="x.jpeg" class="form-control"  required>
                                     </div>
                                 </div>
                                 <center>
-                                    <div class="btn">
-                                        <button type="submit" onclick="Check()" class="btn btn-primary butn">Add
-                                            Room</button>
-                                    </div>
+                                    <button id="rup-btn" type="submit" class="btn btn-primary butn">Add Room</button>
                                 </center>
                             </form>
                         </div>
                         <!-- Column 2 -->
-                    </div>
-                </div>
-                <div class="container mt-5 pt-5">
-                    <div class="container mt-5 pt-5">
-                        <h1><u>Double Room</u></h1>
-                        <div class="row align-items-center">
-                            <!-- Column 1-->
-                            <div class="col-md-6">
-                                <img src="pics/pic1.svg" alt="img" class="img-fluid">
-                            </div>
-                            <!-- Column 1 -->
-
-                            <!-- Column 2 -->
-                            <div class="col-md-6 d-block d-sm-block d-md-block">
-                                <form class="needs-validation" id="form" novalidate>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="validationCustom01"
-                                                   placeholder="Room Price" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="Details"
-                                               required>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputAddress "> Add image : </label>
-                                            <input type="file" class="form-control" placeholder="Image" required>
-                                        </div>
-                                    </div>
-                                    <center>
-                                        <div class="btn">
-                                            <button type="submit" onclick="Check()" class="btn btn-primary butn">Add
-                                                Room</button>
-                                        </div>
-                                    </center>
-                                </form>
-                            </div>
-                            <!-- Column 2 -->
-                        </div>
                     </div>
                 </div>
             </main>
@@ -134,5 +108,6 @@
         </section>
         <!-- CONTENT -->
         <script src="js/Admin_Dashboard.js"></script>
+        <script src="js/Admin_AddRoom.js"></script>
     </body>
 </html>
