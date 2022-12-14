@@ -16,15 +16,18 @@ $(document).ready(function () {
                 if (data.trim() === 'done') {
                     swal("Done", "Room Added Succesfully.", "success")
                     $('#rup-btn').text("Add Room");
+                    $('#rup-form').trigger("reset");
                 } else {
                     swal("Oops", "Something went wrong!", "error")
                     $('#rup-btn').text("Add Room");
+                    $('#rup-form').trigger("reset");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 swal("Oops", "Something went wrong!", "error")
                 $('#rup-btn').text("Add Room");
+                $('#rup-form').trigger("reset");
             },
             processData: false,
             contentType: false

@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/room.css">
-        
+
     </head>
 
     <body>
@@ -103,7 +103,7 @@
                     <c:forEach items="${rs.rows}" var="row">
                         <div class="box flex">
                             <div class="left">
-                                <img src="roomPictures/${row.image}" alt="">
+                                <img src="roomPictures/${row.image}" alt="Room Image">
                             </div>
                             <div class="right">
                                 <h4>${row.type}</h4>
@@ -112,15 +112,33 @@
                                 <%
                                     if (user != null) {
                                 %>
-                                <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
-                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${row.status == 'open'}">
+                                        <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
+                                            <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="#" class="flex1 btn btn-danger">
+                                            <span class="fas fa-ban">&nbsp;Already Booked</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%
                                 } else {
                                 %>
-                                <a class="book-btn" href="#" class="flex1 btn btn-info">
-                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${row.status == 'open'}">
+                                        <a class="book-btn" href="#" class="flex1 btn btn-info">
+                                            <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="#" class="flex1 btn btn-danger">
+                                            <span class="fas fa-ban">&nbsp;Already Booked</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%
                                     }
                                 %>
@@ -143,7 +161,7 @@
                     <c:forEach items="${rs.rows}" var="row">
                         <div class="box flex">
                             <div class="left">
-                                <img src="roomPictures/${row.image}" alt="">
+                                <img src="roomPictures/${row.image}" alt="Room Image">
                             </div>
                             <div class="right">
                                 <h4>${row.type}</h4>
@@ -152,15 +170,33 @@
                                 <%
                                     if (user != null) {
                                 %>
-                                <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
-                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${row.status == 'open'}">
+                                        <a href="booking.jsp?id=${row.id}" class="flex1 btn btn-info">
+                                            <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="#" class="flex1 btn btn-danger">
+                                            <span class="fas fa-ban">&nbsp;Already Booked</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%
                                 } else {
                                 %>
-                                <a class="book-btn" href="#" class="flex1 btn btn-info">
-                                    <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${row.status == 'open'}">
+                                        <a class="book-btn" href="#" class="flex1 btn btn-info">
+                                            <span class="fas fa-arrow-circle-right">&nbsp;Book</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="#" class="flex1 btn btn-danger">
+                                            <span class="fas fa-ban">&nbsp;Already Booked</span>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%
                                     }
                                 %>

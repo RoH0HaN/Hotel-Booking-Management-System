@@ -155,7 +155,7 @@
         </div>
         <%@include file="footer.jsp" %>
         <script src="js/navbar.js"></script>
-        <script src="js/profile.js"></script>
+        <!--<script src="js/profile.js"></script>-->
     </body>
     
 

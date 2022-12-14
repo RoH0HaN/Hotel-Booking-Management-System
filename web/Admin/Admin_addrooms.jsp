@@ -29,21 +29,40 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
-        <div class="headernav" id="header">
-            <div class="navcontainer">
-                <nav class="navcss">
-                    <h3>Admin Dashboard</h3>
-                    <ul id="sidemenu">
-                        <li><a href="Admin_Dashboard.jsp">Dashboard</a></li>
-                        <li><a href="Admin_addrooms.jsp">Addrooms</a></li>
-                        <li><a href="Admin_Bookings.jsp">Bookings</a></li>
-                        <li><a id="out-btn" href="#">Logout</a></li>
-                        <i class="fa-solid fa-times" onclick="closemenu()"></i>
-                    </ul>
-                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-                </nav>
+       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Admin_Dashboard.jsp">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_addrooms.jsp">Add Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_Bookings.jsp">Bookings</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Check In/Out
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Check In</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Check Out</a>             
+                        </div>
+                    </li>
+                    
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <button id="out-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+                </form>
             </div>
-        </div>
+        </nav>
 
 
 

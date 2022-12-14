@@ -51,7 +51,7 @@ public class AddRoomServlet extends HttpServlet {
                     st.setInt(7, 2);
                     st.setInt(8, 2);
                 }
-                String upPath = request.getRealPath("" + File.separator) + "roomPictures" + File.separator + rImageName;
+                String upPath = getServletContext().getRealPath("roomPictures" + File.separator + rImageName);
                 if (Helper.saveRoomPicture(part.getInputStream(), upPath)) {
                     st.executeUpdate();
                     out.print("done");

@@ -36,7 +36,7 @@ public class UpdateServlet extends HttpServlet {
                 if ("".equals(imageName)) {
                     imageName = user.getProfileImage();
                     check = true;
-                } else if (profilePic.equals("default.svg")) {
+                } else if (profilePic.equals("default.png")) {
                     dflt = true;
                 }
 
@@ -50,8 +50,8 @@ public class UpdateServlet extends HttpServlet {
                 UserDao userDao = new UserDao(ConnectionProvider.getConnection());
 
                 if (userDao.updateUser(user)) {
-                    String delPath = request.getRealPath(""+ File.separator ) + "profile" + File.separator + profilePic;
-                    String upPath = request.getRealPath(""+ File.separator ) + "profile" + File.separator + user.getProfileImage();
+                    String delPath = getServletContext().getRealPath("profile" + File.separator + profilePic);
+                    String upPath = getServletContext().getRealPath("profile" + File.separator + imageName);
 
                     if (dflt) {
                         if (Helper.saveFile(part.getInputStream(), upPath)) {

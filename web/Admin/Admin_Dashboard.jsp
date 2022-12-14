@@ -16,7 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- My CSS -->
-        <link rel="stylesheet" href="css/style.css">
+        <!--<link rel="stylesheet" href="css/style.css">-->
 
         <title>Dashboard</title>
         <!-- Bootstrap -->
@@ -40,22 +40,40 @@
                 response.sendRedirect("Admin_Login.jsp");
             }
         %>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="headernav" id="header">
-            <div class="navcontainer">
-                <nav class="navcss">
-                    <h3>Admin Dashboard</h3>
-                    <ul id="sidemenu">
-                        <li><a href="Admin_Dashboard.jsp">Dashboard</a></li>
-                        <li><a href="Admin_addrooms.jsp">Addrooms</a></li>
-                        <li><a href="Admin_Bookings.jsp">Bookings</a></li>
-                        <li><a id="out-btn" href="#">Logout</a></li>
-                        <i class="fa-solid fa-times" onclick="closemenu()"></i>
-                    </ul>
-                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-                </nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Admin_Dashboard.jsp">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_addrooms.jsp">Add Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_Bookings.jsp">Bookings</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Check In/Out
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Check In</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Check Out</a>             
+                        </div>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <button id="out-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+                </form>
             </div>
-        </div>
+        </nav>
 
 
 
@@ -63,57 +81,59 @@
         <section id="content">
             <!-- MAIN -->
             <main>
-                <div class="head-title">
-                    <div class="left">
-                        <h1>Dashboard</h1>
+                <div class="card">
+                    <div class="card-header">
                         <%if (admin != null) {%>
-                        <p><b>Name :</b> <%= admin.getName()%></p>
+                        <p><b>Welcome, Admin</b> <%= admin.getName()%></p>
                         <p><b>Email :</b> <%= admin.getEmail()%></p>
                         <%
                             }
                         %>
                     </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0 text-center">
+                            <h1>Dashboard</h1>
+                        </blockquote>
+                    </div>
                 </div>
+                    <br>
 
+
+                <%
+                    String pending = null, canceled = null, approve = null;
+                    String query = "SELECT status, COUNT(*) FROM booking GROUP BY status";
+                    Statement st = ConnectionProvider.getConnection().createStatement();
+                    ResultSet set = st.executeQuery(query);
+                    if (set.next()) {
+                        canceled = set.getString("count");
+                        if (set.next()) {
+                            pending = set.getString("count");
+                            if (set.next()) {
+                                approve = set.getString("count");
+                            }
+                        }
+                    }
+                %>
                 <div class="container">
-                    <div class="container m-5 p-5 rounded">
-                        <div class="row ">
-
-                            <%
-                                String pending = null, canceled = null, approve = null;
-                                String query = "SELECT status, COUNT(*) FROM booking GROUP BY status";
-                                Statement st = ConnectionProvider.getConnection().createStatement();
-                                ResultSet set = st.executeQuery(query);
-                                if (set.next()) {
-                                    canceled = set.getString("count");
-                                    if (set.next()) {
-                                        pending = set.getString("count");
-                                        if (set.next()) {
-                                            approve = set.getString("count");
-                                        }
-                                    }
-                                }
-                            %>
-
-                            <div class="col-sm shadow">
-                                <i class="fa-solid fa-check p-2"></i>
-                                New Bookings
-                                <h4 class="pl-5 m-3"><%= pending%></h4>
-                            </div>
-                            <div class="col-sm shadow">
-                                <i class="fa-solid fa-person-circle-check p-2"></i>
-                                Approved Bookings
-                                <h4 class="pl-5 m-3"><%= approve%></h4>
-                            </div>
-                            <div class="col-sm shadow">
-                                <i class="fa-solid fa-ban p-2"></i>
-                                Cancelled Bookings
-                                <h4 class="pl-5 m-3"><%= canceled%></h4>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm shadow text-center">
+                            <i class="fa-solid fa-check p-2"></i>
+                            New Bookings
+                            <h4 class=" m-3"><%= pending%></h4>
+                        </div>
+                        <div class="col-sm shadow text-center">
+                            <i class="fa-solid fa-person-circle-check p-2"></i>
+                            Approved Bookings
+                            <h4 class=" m-3"><%= approve%></h4>
+                        </div>
+                        <div class="col-sm shadow text-center">
+                            <i class="fa-solid fa-ban p-2"></i>
+                            Cancelled Bookings
+                            <h4 class=" m-3"><%= canceled%></h4>
                         </div>
                     </div>
                 </div>
-
+                        <br>
                 <div class="container mb-5">
                     <div class="container">
                         <center><u>
