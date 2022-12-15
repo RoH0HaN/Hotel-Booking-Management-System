@@ -28,33 +28,57 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
-        <section>
-            <div class="image">
-                <img src="https://images.pexels.com/photos/1684151/pexels-photo-1684151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                     alt="">
-            </div>
-            <div class="cb">
-                <div class="form">
-                    <h2>Admin Login</h2>
-                    <form id="log-form" action="../AdminLoginServelet" method="POST" class="form">
-                        <div class="inputbox">
-                            <!-- <span>Username</span> -->
-                            <input class="inputitem" type="text" name="username" placeholder="Username" required autofocus>
-                        </div>
-                        <div class="inputbox">
-                            <!-- <span>Password</span> -->
-                            <input class="inputitem" type="password" name="password" placeholder="Password" required>
-                        </div>
-                        <center>
-                            <div style="display: none;" id="log-ldr" class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-11 mt-60 mx-md-auto">
+                    <div class="login-box bg-white pl-lg-5 pl-0">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-wrap bg-white">
+                                    <h4 class="btm-sep pb-3 mb-5">Admin Login</h4>
+                                    <form class="form" method="post" id="log-form" action="../AdminLoginServelet">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group position-relative">
+                                                    <span class="zmdi zmdi-account"></span>
+                                                    <input name="username" type="text" id="email" class="form-control" placeholder="Email Address">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group position-relative">
+                                                    <span class="zmdi zmdi-email"></span>
+                                                    <input name="password" type="password" id="password" class="form-control" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-30">
+                                                <button type="submit" id="submit" class="btn btn-lg btn-custom btn-dark btn-block">Sign In
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </center>
-                        <button id="log-btn" type="submit" class="btn solid">Login</button>
-                    </form>
+                            <div class="col-md-6">
+                                <div class="content text-center">
+                                    <div class="border-bottom pb-5 mb-5">
+                                        <h3 class="c-black">Welcome Admin</h3>
+                                        <a href="sign-up.html" class="btn btn-custom">Please Login</a>
+                                    </div>
+                                    <h5 class="c-black mb-4 mt-n1">Social Media</h5>
+                                    <div class="socials">
+                                        <a href="#" class="zmdi zmdi-facebook"></a>
+                                        <a href="#" class="zmdi zmdi-twitter"></a>
+                                        <a href="#" class="zmdi zmdi-google"></a>
+                                        <a href="#" class="zmdi zmdi-instagram"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     </body>
     <script src="js/Admin_Login.js"></script>
 </html>

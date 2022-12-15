@@ -24,7 +24,8 @@ public class OrderActionServlet extends HttpServlet {
                 String Remarks = request.getParameter("remarks");
                 String Status = request.getParameter("status");
                 String Bid = request.getParameter("bookingid");
-                out.println("----!!!! : "+Bid);
+                String Rid = request.getParameter("roomid");
+                String Uid = request.getParameter("userid");
 
                 String Query = "update booking set status=?, remarks=? where id=?";
                 PreparedStatement stmt = con.prepareStatement(Query);
@@ -33,6 +34,14 @@ public class OrderActionServlet extends HttpServlet {
                 stmt.setInt(3, Integer.parseInt(Bid));
 
                 stmt.executeUpdate();
+                
+                String Query2 = "update room set status=?, uid=? where id=?";
+                PreparedStatement stm = con.prepareStatement(Query2);
+                stm.setString(1, "booked");
+                stm.setInt(2, Integer.parseInt(Uid));
+                stm.setInt(3, Integer.parseInt(Rid));
+
+                stm.executeUpdate();
                 
                 out.print("done");
             } catch (Exception e) {

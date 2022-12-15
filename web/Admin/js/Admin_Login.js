@@ -2,9 +2,9 @@ $(document).ready(function () {
     console.log("Page Loaded!!")
 
     $('#log-form').on('submit', function () {
+        $('#submit').text("Wait..");
         event.preventDefault();
-        $('#log-btn').hide();
-        $('#log-ldr').show();
+        
         let logForm = new FormData(this);
 
         $.ajax({
@@ -18,19 +18,16 @@ $(document).ready(function () {
                             .then((value) => {
                                 window.location = "Admin_Dashboard.jsp"
                             });
-                    $('#log-btn').show();
-                    $('#log-ldr').hide();
+                    $('#submit').text("Sign In");
                 } else {
                     swal("Oops", "Invalid Details!", "error")
-                    $('#log-btn').show();
-                    $('#log-ldr').hide();
+                    $('#submit').text("Sign In");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 swal("Oops", "Something went wrong!", "error")
-                $('#log-btn').show();
-                    $('#log-ldr').hide();
+                $('#submit').text("Sign In");
             },
             processData: false,
             contentType: false

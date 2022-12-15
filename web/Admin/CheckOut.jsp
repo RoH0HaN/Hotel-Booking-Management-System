@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Admin_Bookings
-    Created on : 06-Dec-2022, 2:33:46 PM
-    Author     : mysterio
+    Document   : CheckOut
+    Created on : 15-Dec-2022, 9:52:33 am
+    Author     : rohan
 --%>
 
 <%@page import="com.hotel.entities.Admin"%>
@@ -12,18 +12,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bookings</title>
-        <!-- My CSS -->
-        <link rel="stylesheet" href="css/style.css">
+        <title>Check Out</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
         <script src="https://kit.fontawesome.com/14d362f720.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
@@ -78,7 +78,7 @@
             </div>
         </nav>
 
-
+        <!--Content-->
         <div class="card">
             <div class="card-header">
                 <%if (admin != null) {%>
@@ -90,50 +90,39 @@
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0 text-center">
-                    <h1>Bookings</h1>
-                    <h5>All Approved Bookings are Listed Below</h5>
+                    <h1>Check Out</h1>
+                    <h5>Below Customers are Currently Checked In</h5>
                 </blockquote>
             </div>
         </div>
         <br>
-        <!-- CONTENT -->
-        <section id="content">
-            <!-- MAIN -->
-            <main>
-                <div class="container">
-                    <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
-                    <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved';</sql:query>
-                        <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Booking no.</th>
-                                    <th scope="col">Moblie Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${rs.rows}" var="row">
-                                <tr>
-                                    <td>${row.name}</td>
-                                    <td>${row.id}</td>
-                                    <td>${row.phone}</td>
-                                    <td>${row.email}</td>
-                                    <td>${row.status}</td>
-                                    <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </main>
-            <!-- MAIN -->
-        </section>
-        <!-- CONTENT -->
-        <script src="js/Admin_Dashboard.js"></script>
+        <div class="container">
+            <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
+            <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved' and check_status='CheckedIn';</sql:query>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-white bg-success">
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Application</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${rs.rows}" var="row">
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.name}</td>
+                            <td>${row.email}</td>
+                            <td>${row.phone}</td>
+                            <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                            <td><button onclick="window.location.href = '../CheckOutServlet?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">Check Out</button></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
-
 </html>

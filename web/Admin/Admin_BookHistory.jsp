@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Admin_Bookings
-    Created on : 06-Dec-2022, 2:33:46 PM
-    Author     : mysterio
+    Document   : AdminBookHistory
+    Created on : 15-Dec-2022, 1:57:43 pm
+    Author     : rohan
 --%>
 
 <%@page import="com.hotel.entities.Admin"%>
@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bookings</title>
+        <title>Booking History</title>
         <!-- My CSS -->
         <link rel="stylesheet" href="css/style.css">
         <!-- Bootstrap -->
@@ -36,7 +36,6 @@
                 response.sendRedirect("Admin_Login.jsp");
             }
         %>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +77,6 @@
             </div>
         </nav>
 
-
         <div class="card">
             <div class="card-header">
                 <%if (admin != null) {%>
@@ -90,50 +88,41 @@
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0 text-center">
-                    <h1>Bookings</h1>
-                    <h5>All Approved Bookings are Listed Below</h5>
+                    <h1>History</h1>
+                    <h5>All Bookings are Listed Below</h5>
                 </blockquote>
             </div>
         </div>
         <br>
-        <!-- CONTENT -->
-        <section id="content">
-            <!-- MAIN -->
-            <main>
-                <div class="container">
-                    <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
-                    <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved';</sql:query>
-                        <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Booking no.</th>
-                                    <th scope="col">Moblie Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${rs.rows}" var="row">
-                                <tr>
-                                    <td>${row.name}</td>
-                                    <td>${row.id}</td>
-                                    <td>${row.phone}</td>
-                                    <td>${row.email}</td>
-                                    <td>${row.status}</td>
-                                    <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </main>
-            <!-- MAIN -->
-        </section>
-        <!-- CONTENT -->
-        <script src="js/Admin_Dashboard.js"></script>
-    </body>
 
+        <!--Content-->
+        <div class="container">
+            <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
+            <sql:query dataSource="${con}" var="rs">select * from booking;</sql:query>
+                <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Booking no.</th>
+                            <th scope="col">Moblie Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${rs.rows}" var="row">
+                        <tr>
+                            <td>${row.name}</td>
+                            <td>${row.id}</td>
+                            <td>${row.phone}</td>
+                            <td>${row.email}</td>
+                            <td>${row.status}</td>
+                            <td><button onclick="window.location.href = 'HistoryDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>

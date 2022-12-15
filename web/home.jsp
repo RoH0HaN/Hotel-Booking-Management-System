@@ -195,6 +195,7 @@
                 </div>
             </div>
         </div>
+        <div><%@include file="Reviews.jsp" %></div>
         <div><%@include file="footer.jsp" %></div>
         <!-- Custom Script -->
         <script src="js/navbar.js"></script>

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Admin_BookDetails
-    Created on : 07-Dec-2022, 11:57:11 AM
-    Author     : mysterio
+    Document   : HistoryDetails
+    Created on : 15-Dec-2022, 2:02:39 pm
+    Author     : rohan
 --%>
 
 <%@page import="java.sql.Statement"%>
@@ -17,7 +17,7 @@
         <!-- My CSS -->
         <link rel="stylesheet" href="css/style.css">
 
-        <title>Book Details</title>
+        <title>History</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -70,7 +70,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="MessageRequests.jsp">Message Requests</a>
                     </li>
-                    
+
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button id="out-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
@@ -98,7 +98,7 @@
                 <main>
                     <div class="container mb-5">
                         <div class="container">
-                            <center><h1>Booking Details</h1></center>
+                            <center><h1>Bookings Details</h1></center>
                         </div>
                         <div class="container">
                             <table class="table table-striped">
@@ -174,56 +174,10 @@
                                         <th>Admin Remarks</th>
                                         <td>${row.remarks}</td>
                                     </tr>
-                                    <c:if test="${row.status == 'Pending'}">
-                                        <tr class="text-center">
-                                            <th scope="row" colspan="4"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                    Action
-                                                </button></th>
-                                        </tr>
-                                    </c:if>
                                 </c:forEach>
                             </c:forEach>
                         </table>
 
-                    </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Action Form</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="../OrderActionServlet" method="POST" id="order-form">
-                                        <div class="form-group">
-                                            <label for="exampleFormControlInput1">Remarks</label>
-                                            <input name="remarks" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Admin Remarks">
-                                        </div>
-                                        <div class="form-group" style="display: none">
-                                            <input name="roomid" type="text" class="form-control" id="exampleFormControlInput1" value="<%= rid%>">
-                                        </div>
-                                        <div class="form-group" style="display: none">
-                                            <input name="userid" type="text" class="form-control" id="exampleFormControlInput1" value="<%= uid%>">
-                                        </div>
-                                        <div class="form-group" style="display: none;">
-                                            <input name="bookingid" type="text" class="form-control" id="exampleFormControlInput1" value="<%= bid%>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Order Final Status</label>
-                                            <select name="status" class="form-control" id="exampleFormControlSelect1">
-                                                <option>Approved</option>
-                                                <option>Canceled</option>
-                                            </select>
-                                        </div>
-                                        <button id="order-btn" type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
             </main>
@@ -231,7 +185,6 @@
         </section>
         <!-- CONTENT -->
         <script src="js/Admin_Dashboard.js"></script>
-        <script src="js/Admin_OrderAction.js"></script>
     </body>
 
 </html>

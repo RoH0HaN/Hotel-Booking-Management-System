@@ -15,8 +15,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- My CSS -->
-        <!--<link rel="stylesheet" href="css/style.css">-->
 
         <title>Dashboard</title>
         <!-- Bootstrap -->
@@ -62,10 +60,16 @@
                             Check In/Out
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Check In</a>
+                            <a class="dropdown-item" href="CheckIn.jsp">Check In</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Check Out</a>             
+                            <a class="dropdown-item" href="CheckOut.jsp">Check Out</a>             
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_BookHistory.jsp">Book History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="MessageRequests.jsp">Message Requests</a>
                     </li>
 
                 </ul>
@@ -96,7 +100,7 @@
                         </blockquote>
                     </div>
                 </div>
-                    <br>
+                <br>
 
 
                 <%
@@ -104,41 +108,39 @@
                     String query = "SELECT status, COUNT(*) FROM booking GROUP BY status";
                     Statement st = ConnectionProvider.getConnection().createStatement();
                     ResultSet set = st.executeQuery(query);
-                    if (set.next()) {
-                        canceled = set.getString("count");
-                        if (set.next()) {
+                    while (set.next()) {
+                        if (set.getString("status").equals("Approved")) {
+                            approve = set.getString("count");
+                        } else if (set.getString("status").equals("Pending")) {
                             pending = set.getString("count");
-                            if (set.next()) {
-                                approve = set.getString("count");
-                            }
+                        } else if (set.getString("status").equals("Canceled")) {
+                            canceled = set.getString("count");
                         }
                     }
                 %>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm shadow text-center">
+                        <div class="col-sm shadow text-center bg-info text-white">
                             <i class="fa-solid fa-check p-2"></i>
                             New Bookings
                             <h4 class=" m-3"><%= pending%></h4>
                         </div>
-                        <div class="col-sm shadow text-center">
+                        <div class="col-sm shadow text-center bg-success text-white">
                             <i class="fa-solid fa-person-circle-check p-2"></i>
                             Approved Bookings
                             <h4 class=" m-3"><%= approve%></h4>
                         </div>
-                        <div class="col-sm shadow text-center">
+                        <div class="col-sm shadow text-center bg-danger text-white">
                             <i class="fa-solid fa-ban p-2"></i>
                             Cancelled Bookings
                             <h4 class=" m-3"><%= canceled%></h4>
                         </div>
                     </div>
                 </div>
-                        <br>
+                <br>
                 <div class="container mb-5">
                     <div class="container">
-                        <center><u>
-                                <h1>Recent Bookings</h1>
-                            </u></center>
+                        <center><h1>Recent Bookings</h1></center>
                     </div>
 
                     <div class="container">
@@ -149,7 +151,7 @@
                                     <tr>
                                         <th scope="col">Name</th>
                                         <th scope="col">Booking no.</th>
-                                        <th scope="col">Moblie Number</th>
+                                        <th scope="col">Mobile Number</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>

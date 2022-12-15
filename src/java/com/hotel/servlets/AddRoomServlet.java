@@ -34,7 +34,7 @@ public class AddRoomServlet extends HttpServlet {
                 String rImageName = part.getSubmittedFileName();
 
                 Connection con = ConnectionProvider.getConnection();
-                String Query = "insert into room(type, rent, details, image, name, adult, child, no_bed) values(?,?,?,?,?,?,?,?)";
+                String Query = "insert into room(type, rent, details, image, name, adult, child, no_bed, status, check_status, uid) values(?,?,?,?,?,?,?,?)";
 
                 PreparedStatement st = con.prepareStatement(Query);
                 st.setString(1, rType);
@@ -46,10 +46,16 @@ public class AddRoomServlet extends HttpServlet {
                     st.setInt(6, 1);
                     st.setInt(7, 1);
                     st.setInt(8, 1);
+                    st.setString(9, "open");
+                    st.setString(10, "none");
+                    st.setInt(11, 0);
                 } else {
                     st.setInt(6, 2);
                     st.setInt(7, 2);
                     st.setInt(8, 2);
+                    st.setString(9, "open");
+                    st.setString(10, "none");
+                    st.setInt(11, 0);
                 }
                 String upPath = getServletContext().getRealPath("roomPictures" + File.separator + rImageName);
                 if (Helper.saveRoomPicture(part.getInputStream(), upPath)) {

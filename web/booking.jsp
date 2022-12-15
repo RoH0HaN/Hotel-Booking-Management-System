@@ -163,10 +163,10 @@
                                     <input name="userid" type="text" class="form-control" value="<%= Uid%>">
                                 </div>
                                 <div class="form-group">
-                                    <input name="name" placeholder="Full Name" type="text" class="form-control">
+                                    <input name="name" placeholder="Full Name" type="text" class="form-control" value="<%= user.getName()%>">
                                 </div>
                                 <div class="form-group">
-                                    <input name="email" placeholder="Email" type="email" class="form-control">
+                                    <input name="email" placeholder="Email" type="email" class="form-control" value="<%= user.getEmail()%>">
                                 </div>
                                 <div class="form-group">
                                     <input name="phone" placeholder="Phone Number" type="tel" class="form-control">

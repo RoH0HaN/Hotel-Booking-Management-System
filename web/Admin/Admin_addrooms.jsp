@@ -4,6 +4,7 @@
     Author     : mysterio
 --%>
 
+<%@page import="com.hotel.entities.Admin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,13 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <%
+            Admin admin = (Admin) session.getAttribute("currentAdmin");
+            if (admin == null) {
+                response.sendRedirect("Admin_Login.jsp");
+            }
+        %>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,12 +58,18 @@
                             Check In/Out
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Check In</a>
+                            <a class="dropdown-item" href="CheckIn.jsp">Check In</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Check Out</a>             
+                            <a class="dropdown-item" href="CheckOut.jsp">Check Out</a>             
                         </div>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="Admin_BookHistory.jsp">Book History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="MessageRequests.jsp">Message Requests</a>
+                    </li>
+
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <button id="out-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
@@ -69,10 +82,26 @@
 
         <!-- CONTENT -->
         <section id="content">
+            <div class="card">
+                <div class="card-header">
+                    <%if (admin != null) {%>
+                    <p><b>Welcome, Admin</b> <%= admin.getName()%></p>
+                    <p><b>Email :</b> <%= admin.getEmail()%></p>
+                    <%
+                        }
+                    %>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0 text-center">
+                        <h1>Rooms</h1>
+                        <h5>Please Add Rooms to the Hotel</h5>
+                    </blockquote>
+                </div>
+            </div>
+            <br>
             <!-- MAIN -->
             <main>
                 <div class="container mb-5">
-                    <h1><u>Add Rooms to Hotel</u></h1>
                     <div class="row align-items-center">
                         <!-- Column 1-->
                         <div class="col-md-6">
@@ -104,11 +133,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input name="details" type="text" class="form-control" id="inputAddress" placeholder="Details"
-                                           required>
-                                </div>
+
                                 <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <input name="details" type="text" class="form-control" id="inputAddress" placeholder="Details"
+                                               required>
+                                    </div>
                                     <div class="form-group col-md-10">
                                         <label for="inputAddress "> Add image : </label>
                                         <input name="photo" type="file" value="x.jpeg" class="form-control"  required>

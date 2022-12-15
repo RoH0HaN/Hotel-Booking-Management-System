@@ -32,7 +32,7 @@ public class BookingServlet extends HttpServlet {
                 String UserId = request.getParameter("userid");
                 
                 Connection con = ConnectionProvider.getConnection();
-                String Query = "insert into booking(name, email, phone, identity, number, address, checkin, checkout, status, remarks, user_id, room_id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+                String Query = "insert into booking(name, email, phone, identity, number, address, checkin, checkout, status, remarks, user_id, room_id,check_status) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 PreparedStatement st = con.prepareStatement(Query);
                 st.setString(1, Name);
@@ -47,6 +47,7 @@ public class BookingServlet extends HttpServlet {
                 st.setString(10, "Not Updated Yet.");
                 st.setInt(11, Integer.parseInt(UserId));
                 st.setInt(12, Integer.parseInt(RoomId));
+                st.setString(13, "none");
                 st.executeUpdate();
                 
                 out.print("done");

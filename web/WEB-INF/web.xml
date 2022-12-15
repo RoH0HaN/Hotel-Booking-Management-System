@@ -36,6 +36,18 @@
         <servlet-name>AddRoomServlet</servlet-name>
         <servlet-class>com.hotel.servlets.AddRoomServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckInServlet</servlet-name>
+        <servlet-class>com.hotel.servlets.CheckInServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>com.hotel.servlets.CheckOutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadMessageServlet</servlet-name>
+        <servlet-class>com.hotel.servlets.ReadMessageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>AddRoomServlet</servlet-name>
         <url-pattern>/AddRoomServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckInServlet</servlet-name>
+        <url-pattern>/CheckInServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/CheckOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadMessageServlet</servlet-name>
+        <url-pattern>/ReadMessageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

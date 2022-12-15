@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Admin_Bookings
-    Created on : 06-Dec-2022, 2:33:46 PM
-    Author     : mysterio
+    Document   : CheckIn
+    Created on : 15-Dec-2022, 9:52:21 am
+    Author     : rohan
 --%>
 
 <%@page import="com.hotel.entities.Admin"%>
@@ -12,9 +12,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bookings</title>
-        <!-- My CSS -->
-        <link rel="stylesheet" href="css/style.css">
+
+        <title>Check In</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
               integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -36,7 +35,6 @@
                 response.sendRedirect("Admin_Login.jsp");
             }
         %>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#"><b>Admin Dashboard</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +76,7 @@
             </div>
         </nav>
 
-
+        <!--Content-->
         <div class="card">
             <div class="card-header">
                 <%if (admin != null) {%>
@@ -90,50 +88,82 @@
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0 text-center">
-                    <h1>Bookings</h1>
-                    <h5>All Approved Bookings are Listed Below</h5>
+                    <h1>Check In</h1>
                 </blockquote>
             </div>
         </div>
         <br>
-        <!-- CONTENT -->
-        <section id="content">
-            <!-- MAIN -->
-            <main>
-                <div class="container">
-                    <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
-                    <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved';</sql:query>
-                        <table class="table mt-5 table-bordered table-responsive-sm table-responsive-md">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Booking no.</th>
-                                    <th scope="col">Moblie Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${rs.rows}" var="row">
-                                <tr>
-                                    <td>${row.name}</td>
-                                    <td>${row.id}</td>
-                                    <td>${row.phone}</td>
-                                    <td>${row.email}</td>
-                                    <td>${row.status}</td>
-                                    <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </main>
-            <!-- MAIN -->
-        </section>
-        <!-- CONTENT -->
-        <script src="js/Admin_Dashboard.js"></script>
-    </body>
+        <div class="container">
+            <div class="container text-center">
+                <button id="read" type="button" class="btn btn-info btn-lg">Check Current Checked In Status</button>
+            </div>
+        </div>
+        <br>
+        <div id="pending" class="container">
+            <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
+            <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved' and check_status='none';</sql:query>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-white bg-success">
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Application</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${rs.rows}" var="row">
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.name}</td>
+                            <td>${row.email}</td>
+                            <td>${row.phone}</td>
+                            <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                            <td><button onclick="window.location.href = '../CheckInServlet?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">Check In</button></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
 
+        <!--Check In Details-->
+        <div id="done" class="container">
+            <sql:setDataSource driver="org.postgresql.Driver" url="jdbc:postgresql://db.uvqlnvrimfnvbqsycyln.supabase.co:5432/postgres" user="postgres" password="Roh@n8145312848" var="con"></sql:setDataSource>
+            <sql:query dataSource="${con}" var="rs">select * from booking where status='Approved' and check_status='CheckedIn';</sql:query>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-white bg-success">
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${rs.rows}" var="row">
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.name}</td>
+                            <td>${row.email}</td>
+                            <td>${row.phone}</td>
+                            <td><button onclick="window.location.href = 'Admin_BookDetails.jsp?uid=${row.user_id}&rid=${row.room_id}&bid=${row.id}';" class="btn btn-primary">View</button></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+    <script>
+        $(document).ready(function () {
+            $('#done').hide();
+            $('#read').click(function () {
+                $('#done').toggle()
+                $('#pending').toggle();
+            })
+        });
+    </script>
 </html>
