@@ -79,7 +79,7 @@
                         <!-- Column 2 -->
                         <div class="col-md-6">
                             <h1 class="mb-4 font-weight-bold">
-                                <span class="text-info">Lincoln Room</span>
+                                <span class="text-info">${row.name}</span>
                             </h1>
                             <h5>From ₹${row.rent}/night</h5>
                             <p class="mb-4 pb-2 ">

@@ -73,7 +73,7 @@
 
                     <!-- Column 2 -->
                     <div class="col-md-6 d-none d-sm-none d-md-block">
-                        <img src="image/img2.svg" alt="tours pics" class="img-fluid">
+                        <img src="image/Outdoor Camp.svg" alt="tours pics" class="img-fluid">
                     </div>
                     <!-- Column 2 -->
                 </div>
@@ -195,7 +195,6 @@
                 </div>
             </div>
         </div>
-        <div><%@include file="Reviews.jsp" %></div>
         <div><%@include file="footer.jsp" %></div>
         <!-- Custom Script -->
         <script src="js/navbar.js"></script>
